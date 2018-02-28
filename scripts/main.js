@@ -7,23 +7,32 @@ var size = document.querySelector("[name='size']");
 var flavor = document.querySelector("[name='flavor']");
 var strength = document.querySelector("[name='strength']");
 
-var order = [];
+var order = []; //empty array to hold order form submissions. array elements are objects
 
-// function: CREATE A NEW ELEMENT
-var createNew = function(tagName) {
+var orderContainer = document.querySelector(".orderContainer"); // find empty div element to hold orders
+
+// function: CREATE A NEW ELEMENT & GIVE IT ATTRIBUTES
+var createNew = function(tagName, attribute, attributeValue) {
     var newElement = document.createElement(tagName);
-    newElement.setAttribute("style", "margin: 5px;");
+    newElement.setAttribute(attribute, attributeValue);
     return newElement;
 }
 // the end
 
-// function: SUBMIT EVENT HANDLER. REFACTOR THE HECK OUT OF THIS, JANELLE
+// function: "SUBMIT" EVENT HANDLER. [[NOTE TO JANELLE: REFACTOR THE HECK OUT OF THIS, PLEASE]]
 var submitOrder = function(event) {
     event.preventDefault();
-    order.push([customerName.value, coffeeOrder.value, emailAddress.value, size.value, flavor.value, strength.value]);
-    console.log(order);  
-    var orderContainer = document.querySelector(".orderContainer");
-    var newUL = createNew("ul");
+    var newestOrder = {
+        customerName: customerName.value,
+        type: coffeeOrder.value, 
+        email: emailAddress.value,
+        size: size.value, 
+        flavor: flavor.value,
+        strength: strength.value
+    };
+    order.push(newestOrder);
+    console.log(order);
+    var newUL = createNew("ul", "style", "list-style-type: square;");
     var customerNameLI = createNew("li");
     var coffeeLI = createNew("li");
     var emailLI = createNew("li");

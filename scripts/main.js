@@ -11,9 +11,10 @@ var order = []; //empty array to hold order form submissions. array elements are
 
 var orderContainer = document.querySelector(".orderContainer"); // find empty div element to hold orders
 
-// function: CREATE A NEW ELEMENT & GIVE IT ATTRIBUTES
-var createNew = function(tagName, attribute, attributeValue) {
+// function: CREATE A NEW ELEMENT & GIVE IT A CLASS & ATTRIBUTES
+var createNew = function(tagName, className, attribute, attributeValue) {
     var newElement = document.createElement(tagName);
+    newElement.classList.add(className);
     newElement.setAttribute(attribute, attributeValue);
     return newElement;
 }
@@ -32,7 +33,10 @@ var submitOrder = function(event) {
     };
     order.push(newestOrder);
     console.log(order);
-    var newUL = createNew("ul", "style", "list-style-type: square;");
+    var newUL = createNew("ul", "orderUL", "style", "list-style-type: square;");
+    newUL.addEventListener("click", function() {
+        orderContainer.removeChild(newUL);
+    });
     var customerNameLI = createNew("li");
     var coffeeLI = createNew("li");
     var emailLI = createNew("li");
@@ -55,5 +59,10 @@ var submitOrder = function(event) {
 };
 // the end
 
-// ADD THE EVENT LISTENER TO THE FORM
+// ADD AN EVENT LISTENER TO THE FORM
 coffeeForm.addEventListener("submit", submitOrder);
+
+// ADD AN EVENT LISTENER TO THE UL HOLDING THE ORDER
+orderUL.addEventListener("click", function(event) {
+    var orderUL = document.querySelector(".orderUL");
+})
